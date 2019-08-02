@@ -1,46 +1,49 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const sql = require('sqlite3').verbose()
+const sqlite3 = require('sqlite3').verbose()
 const request = require('request');
-const spawn = require("child_process").spawn;
-const pythonProcess = spawn('python',["./thon.py",]);
+
+let db = new sqlite3.Database('./sample.db');
+// db.run('CREATE TABLE disklog(HOSTNAME TEXT ,MOUNTPOINT TEXT,TOTALSIZE TEXT,USED TEXT,AVAIL TEXT,PERCENTAGEUSED TEXT)');
 
 const app = express();
 app.use(bodyParser.json()) // for parsing application/json
 
-// var data = pythonProcess.stdout.on('data');
-// function sf (data) => {
-//     var output = data;
-// }
-function run() {
-    var spawn = require('child_process').spawn;
-    var result = '';
-    pythonProcess.stdout.on('data', function(data) {
-         result = data;
-         console.log(result)
-         return result;
-    });
-}
-
-run();
-
-
-app.post('/',async (req,res)=>{
+app.post('/post',(req,res)=>{
     try {
+        db.run('INSERT INTO disklog(HOSTNAME,MOUNTPOINT,TOTALSIZE,USED,AVAIL,PERCENTAGEUSED) VALUES((?),(?),(?),(?),(?),(?))',
+        req.body.hostname, req.body.mountpoint,req.body.totalsize,req.body.used,req.body.avail,req.body.percentageused,
+        function(err) {
+            if (err) { return console.log(err.message)}});
         
-    } catch (error) {
+        console.log(req.body)
+        res.send("done")
+    }catch (error) {
         console.error('ERROR:');
-        console.error(error);
+        db.close()
+        console.log(db)
+        // console.error(error);
+        res.send(error)
     }
     });
 app.get('/',(req,res)=>{
-     const user={
+    const user={
         //  "url":"www.google.com",
          "text":"hi there"
-     };
+    };
+     
+    let sql = 'SELECT * FROM disklog';
+    db.all(sql, [], (err, rows) => {
+    if (err) {
+    throw err;
+    }
+    rows.forEach((row) => {
+    console.log(row);
+    });
+    });
      res.send(user)
  })
 
 
-app.listen(5069);
-console.log("listening on port 5069")
+app.listen(5047);
+console.log("listening on port 5047")
