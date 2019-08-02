@@ -10,10 +10,25 @@
     "type": "git",
     "url": "git+https://github.com/akashraj98/disk-usage-tracker.git"
   },
-  "author": "",
+  "author": "akash raj",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/akashraj98/disk-usage-tracker/issues"
   },
-  "homepage": "https://github.com/akashraj98/disk-usage-tracker#readme"
+  "homepage": "https://github.com/akashraj98/disk-usage-tracker#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1",
+    "request": "^2.88.0",
+    "sqlite3": "^4.0.9",
+    "sqlite-json": "^1.1.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "app",
+    "tracks",
+    "disk",
+    "usage"
+  ]
 }
