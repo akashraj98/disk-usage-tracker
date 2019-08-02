@@ -34,7 +34,8 @@ app.post('/post',(req,res)=>{
         res.send(error)
     }
     });
-app.get('/',(req,res)=>{
+
+app.get('/get',(req,res)=>{
 
     exporter.json('select * FROM disklog;', function (err, json) {
         console.log(json)
@@ -46,6 +47,10 @@ app.get('/',(req,res)=>{
       });
  });
 
+app.get('/',(req,res)=>{
+    var sendit = "An overexcited response"
+    res.send(sendit)
+});
 //  sample post request3
 //  {
 // 	"hostname": "master-Inspiron",
@@ -59,5 +64,5 @@ app.get('/',(req,res)=>{
 
 
 
-app.listen(8080);
-console.log("running on port 8080");
+app.listen(8081);
+console.log("running on port 8081");
