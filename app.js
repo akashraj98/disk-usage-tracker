@@ -64,5 +64,5 @@ app.get('/',(req,res)=>{
 
 
 
-app.listen(8080);
-console.log("running on port 8080");
+app.listen(3006);
+console.log("running on port 3006");
