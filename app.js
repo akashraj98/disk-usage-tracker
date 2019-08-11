@@ -25,12 +25,12 @@ app.post('/post',(req,res)=>{
 
         db.run("INSERT INTO disklog(HOSTNAME,MOUNTPOINT,TOTALSIZE,USED,AVAIL,PERCENTAGEUSED) SELECT(?),(?),(?),(?),(?),(?) WHERE NOT EXISTS(SELECT * FROM disklog  WHERE HOSTNAME=(?));",
         req.body.hostname, req.body.mountPoint,req.body.totalsize,req.body.used,req.body.avail,req.body.percentageused,req.body.hostname);
-        res.send("data recieved")
+        res.send("data recieved")   
     }catch (error) {    
         console.error('ERROR:');
         db.close()
         console.log(db)
-        // console.error(error);
+        console.error(error);
         res.send(error)
     }
     });
@@ -48,7 +48,7 @@ app.get('/get',(req,res)=>{
  });
 
 app.get('/',(req,res)=>{
-    var sendit = "An overexcited response"
+    var sendit = {"Data":"An overexcited response"}
     res.send(sendit)
 });
 //  sample post request3

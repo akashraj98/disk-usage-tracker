@@ -2,6 +2,7 @@
 import subprocess
 import requests
 import json
+# from json.encoder import JSONEncoder
 import socket
 def checkOnce():
     disklog = []
@@ -12,13 +13,12 @@ def checkOnce():
     data=[disklog]
     return(data)
 if __name__ == "__main__":
-    threashold = 9
     path = '/'
-    url = 'http://localhost:8080/post'
+    url = 'https://diskbot.cloudstuff.tech/post'
     log = checkOnce()
     for disklog in log[0]:
         if path in disklog[5] and len(disklog[-1])==1:
             payload={'hostname':socket.gethostname(),'mountPoint':disklog[-1],'totalsize':disklog[1],'used':disklog[2],
             'avail':disklog[3],'percentageused':disklog[4]}
-            r = requests.post(url, data=json.dumps(payload))#provide with url
+            r = requests.post(url, data=json.dumps(payload),headers={"Content-Type": "application/json"})#provide with url
             print(r.text)
