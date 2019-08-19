@@ -6,7 +6,7 @@ import json
 import socket
 def checkOnce():
     disklog = []
-    df = subprocess.Popen(["df", "-h"], stdout=subprocess.PIPE)
+    df = subprocess.Popen(["df"], stdout=subprocess.PIPE)
     for line in df.stdout:
         splitline = line.decode().split()
         disklog.append(splitline)
