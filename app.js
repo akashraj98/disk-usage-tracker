@@ -25,8 +25,8 @@ app.post('/post',(req,res)=>{
 
         db.run("INSERT INTO disklog(HOSTNAME,MOUNTPOINT,TOTALSIZE,USED,AVAIL,PERCENTAGEUSED) SELECT(?),(?),(?),(?),(?),(?) WHERE NOT EXISTS(SELECT * FROM disklog  WHERE HOSTNAME=(?));",
         req.body.hostname, req.body.mountPoint,req.body.totalsize,req.body.used,req.body.avail,req.body.percentageused,req.body.hostname);
-        res.send("data recieved")   
-    }catch (error) {    
+        res.send("data recieved")
+    }catch (error) {
         console.error('ERROR:');
         db.close()
         console.log(db)
@@ -54,12 +54,11 @@ app.get('/',(req,res)=>{
 //  sample post request3
 //  {
 // 	"hostname": "master-Inspiron",
-// 	"mountPoint": "/user/bin", 
-// 	"totalsize": "31G", 
-// 	"used": "16G", 
-// 	"avail": "14G", 
+// 	"mountPoint": "/user/bin",
+// 	"totalsize": "31G",
+// 	"used": "16G",
+// 	"avail": "14G",
 // 	"percentageused": "53%"
-	
 // }
 
 
