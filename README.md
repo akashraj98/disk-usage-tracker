@@ -7,4 +7,5 @@ If disk usage exceed the threashold limit
 Disk utilizartion exceed perticular threashold for a certain time period
 
 Example of slack message
-![image info](./pictures/image.png)
+
+![alt text](diskbot.png "Title")
